@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import AdminDashboard from "./pages/AdminDashboard";
-import ComplaintDetailsPage from "./pages/ComplaintDetailsPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import StudentDashboard from "./pages/StudentDashboard";
@@ -24,14 +23,6 @@ const AppRoutes = () => (
       element={
         <ProtectedRoute allowedRoles={["student"]}>
           <StudentDashboard />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-      path="/student/complaints/:id"
-      element={
-        <ProtectedRoute allowedRoles={["student"]}>
-          <ComplaintDetailsPage />
         </ProtectedRoute>
       }
     />

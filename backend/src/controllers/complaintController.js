@@ -41,26 +41,6 @@ const getAllComplaints = async (_req, res) => {
   }
 };
 
-const getComplaintById = async (req, res) => {
-  try {
-    const complaint = await Complaint.findById(req.params.id).populate("student", "name email");
-
-    if (!complaint) {
-      return res.status(404).json({ message: "Complaint not found" });
-    }
-
-    const isAdmin = req.user.role === "admin";
-    const isOwner = complaint.student?._id?.toString() === req.user.id;
-    if (!isAdmin && !isOwner) {
-      return res.status(403).json({ message: "Access denied" });
-    }
-
-    return res.json(complaint);
-  } catch (error) {
-    return res.status(500).json({ message: "Server error", error: error.message });
-  }
-};
-
 const updateComplaintStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -89,6 +69,5 @@ module.exports = {
   createComplaint,
   getMyComplaints,
   getAllComplaints,
-  getComplaintById,
   updateComplaintStatus,
 };

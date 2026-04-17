@@ -249,41 +249,6 @@ th {
   font-weight: 700;
 }
 
-.detail-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin: 14px 0;
-}
-
-.detail-item {
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 12px;
-  background: #ffffff;
-}
-
-.detail-label {
-  margin: 0 0 8px;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.detail-item p {
-  margin: 0;
-}
-
-.detail-description {
-  margin-bottom: 14px;
-}
-
-.btn-link {
-  display: inline-block;
-  margin-top: 14px;
-  font-weight: 600;
-}
-
 @media (max-width: 960px) {
   .nav-inner {
     flex-wrap: wrap;
@@ -296,10 +261,6 @@ th {
 
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .detail-grid {
-    grid-template-columns: 1fr;
   }
 }
 
