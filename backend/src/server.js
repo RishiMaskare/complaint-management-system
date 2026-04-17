@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
-const connectDb = require("./config/db");
+const { connectDb, closeDb } = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
 
@@ -13,6 +13,11 @@ const PORT = process.env.PORT || 5000;
 
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads");
+}
+
+if (!process.env.JWT_SECRET) {
+  process.env.JWT_SECRET = "dev_jwt_secret_change_me";
+  console.warn("JWT_SECRET not set. Using development fallback secret.");
 }
 
 connectDb();
@@ -35,4 +40,14 @@ app.use((err, _req, res, _next) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+process.on("SIGINT", async () => {
+  await closeDb();
+  process.exit(0);
+});
+
+process.on("SIGTERM", async () => {
+  await closeDb();
+  process.exit(0);
 });
