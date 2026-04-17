@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api, { API_BASE_URL } from "../api";
 import { useAuth } from "../context/AuthContext";
 import NewComplaintPage from "./NewComplaintPage";
@@ -64,6 +65,7 @@ const StudentDashboard = () => {
                   <th>Location</th>
                   <th>Status</th>
                   <th>Image</th>
+                  <th>Details</th>
                 </tr>
               </thead>
               <tbody>
@@ -80,6 +82,9 @@ const StudentDashboard = () => {
                       ) : (
                         "N/A"
                       )}
+                    </td>
+                    <td>
+                      <Link to={`/student/complaints/${item._id}`}>View Details</Link>
                     </td>
                   </tr>
                 ))}

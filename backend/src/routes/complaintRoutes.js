@@ -4,6 +4,7 @@ const path = require("path");
 const {
   createComplaint,
   getAllComplaints,
+  getComplaintById,
   getMyComplaints,
   updateComplaintStatus,
 } = require("../controllers/complaintController");
@@ -23,6 +24,7 @@ const upload = multer({ storage });
 
 router.post("/", protect, authorizeRoles("student"), upload.single("image"), createComplaint);
 router.get("/my", protect, authorizeRoles("student"), getMyComplaints);
+router.get("/:id", protect, getComplaintById);
 router.get("/", protect, authorizeRoles("admin"), getAllComplaints);
 router.patch("/:id/status", protect, authorizeRoles("admin"), updateComplaintStatus);
 
