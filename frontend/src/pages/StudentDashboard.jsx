@@ -5,7 +5,7 @@ import NewComplaintPage from "./NewComplaintPage";
 
 const StudentDashboard = () => {
   const [complaints, setComplaints] = useState([]);
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   const fetchComplaints = async () => {
     const { data } = await api.get("/complaints/my");
@@ -16,14 +16,39 @@ const StudentDashboard = () => {
     fetchComplaints();
   }, []);
 
+  const pendingCount = complaints.filter((item) => item.status === "Pending").length;
+  const inProgressCount = complaints.filter((item) => item.status === "In Progress").length;
+  const resolvedCount = complaints.filter((item) => item.status === "Resolved").length;
+
   return (
     <div className="page">
-      <header className="page-header">
-        <h2>Welcome, {user?.name}</h2>
-        <button className="secondary" onClick={logout}>
-          Logout
-        </button>
+      <header className="page-header card hero-card">
+        <div>
+          <p className="eyebrow">Student Dashboard</p>
+          <h2>Welcome back, {user?.name}</h2>
+          <p className="muted">Raise and track your complaints in one place.</p>
+        </div>
       </header>
+
+      <section className="stats-grid">
+        <article className="stat-card">
+          <p>Total Complaints</p>
+          <h3>{complaints.length}</h3>
+        </article>
+        <article className="stat-card">
+          <p>Pending</p>
+          <h3>{pendingCount}</h3>
+        </article>
+        <article className="stat-card">
+          <p>In Progress</p>
+          <h3>{inProgressCount}</h3>
+        </article>
+        <article className="stat-card">
+          <p>Resolved</p>
+          <h3>{resolvedCount}</h3>
+        </article>
+      </section>
+
       <NewComplaintPage onCreated={fetchComplaints} />
 
       <div className="card">

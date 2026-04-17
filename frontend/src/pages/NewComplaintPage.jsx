@@ -39,7 +39,8 @@ const NewComplaintPage = ({ onCreated }) => {
   return (
     <div className="card">
       <h3>Submit New Complaint</h3>
-      <form onSubmit={handleSubmit}>
+      <p className="muted">Attach details and image proof to speed up resolution.</p>
+      <form onSubmit={handleSubmit} className="grid-form">
         <select
           value={form.category}
           onChange={(e) => setForm({ ...form, category: e.target.value })}
@@ -64,10 +65,16 @@ const NewComplaintPage = ({ onCreated }) => {
           rows={4}
           required
         />
-        <input type="file" accept="image/*" onChange={(e) => setForm({ ...form, image: e.target.files?.[0] || null })} />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setForm({ ...form, image: e.target.files?.[0] || null })}
+        />
         {message && <p className="success">{message}</p>}
         {error && <p className="error">{error}</p>}
-        <button type="submit">Submit Complaint</button>
+        <button className="btn" type="submit">
+          Submit Complaint
+        </button>
       </form>
     </div>
   );

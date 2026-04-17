@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -39,7 +40,12 @@ const AppRoutes = () => (
 
 const App = () => (
   <AuthProvider>
-    <AppRoutes />
+    <div className="app-shell">
+      <Navbar />
+      <main className="main-content">
+        <AppRoutes />
+      </main>
+    </div>
   </AuthProvider>
 );
 

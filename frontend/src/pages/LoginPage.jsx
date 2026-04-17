@@ -22,29 +22,41 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="card">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="College email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          required
-        />
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don&apos;t have an account? <Link to="/register">Register</Link>
-      </p>
+    <div className="auth-layout">
+      <section className="auth-info card">
+        <p className="eyebrow">Smart Campus Complaint Management</p>
+        <h2>Report. Track. Resolve.</h2>
+        <p className="muted">
+          Submit complaints, monitor status updates, and get issues resolved faster with a transparent digital workflow.
+        </p>
+      </section>
+
+      <section className="card auth-card">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="College email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
+          />
+          {error && <p className="error">{error}</p>}
+          <button className="btn" type="submit">
+            Login
+          </button>
+        </form>
+        <p>
+          Don&apos;t have an account? <Link to="/register">Register</Link>
+        </p>
+      </section>
     </div>
   );
 };
