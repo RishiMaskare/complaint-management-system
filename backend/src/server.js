@@ -20,8 +20,6 @@ if (!process.env.JWT_SECRET) {
   console.warn("JWT_SECRET not set. Using development fallback secret.");
 }
 
-connectDb();
-
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
@@ -38,9 +36,19 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ message: "Unexpected server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await connectDb();
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Startup failed:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
 
 process.on("SIGINT", async () => {
   await closeDb();
